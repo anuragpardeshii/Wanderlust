@@ -11,8 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "cloudinary": "^2.4.0",
     "coffeescript": "^2.7.0",
     "connect-flash": "^0.1.1",
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "ejs-mate": "^4.0.0",
     "express": "^4.19.2",
@@ -25,6 +27,7 @@
     "mongoose": "^8.5.4",
     "mongosh": "^2.2.15",
     "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0",
     "node": "^22.7.0",
     "nodemon": "^3.1.4",
     "passport": "^0.7.0",
