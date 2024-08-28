@@ -1,4 +1,8 @@
 <% layout("/layouts/boilerplate") %>
+<script>
+    const mapToken = "<%= process.env.MAP_TOKEN %>";
+    const coordinates = <%- JSON.stringify(listing.geometry.coordinates) %>;
+</script>
     <div class="row">
         <div class="col-8 offset-3">
             <h3>
@@ -20,6 +24,7 @@
                     <%= listing.country %>
                 </p>
             </div>
+            <hr>
         </div>
 
         <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
@@ -31,10 +36,9 @@
             </form>
         </div>
         <% } %>
-            <div class="col-8 offset-3 mb-3">
-                <hr>
+            <div class="col-6 offset-3 mb-3">
                 <% if(currUser) { %>
-                <h4>Leave a review</h4>
+                <h4 class="mt-3">Leave a review</h4>
                 <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation" novalidate>
                     <div class="mb-3 mt-3">
                         <label for="rating" class="form-label">Rating</label>
@@ -61,30 +65,37 @@
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="comment" class="form-label">Comments</label>
-                        <textarea name="review[comment]" id="comment" cols="10" rows="5" class="form-control"
+                        <textarea name="review[comment]" id="comment" cols="5" rows="5" class="form-control"
                             required></textarea>
                         <div class="invalid-feedback">Please enter comments for review</div>
                     </div>
                     <button class="btn btn-outline-dark">Submit</button>
                 </form>
                 <hr>
-
                 <% } %>
-                <p><b>All Reviwes</b></p>
+                <% if(listing.reviews.length > 0) { %>
                 <div class="row">
+                    <p><b>All Reviwes</b></p>
                     <% for(review of listing.reviews) {%>
                         <div class="card col-5 ms-3 mb-3">
                             <div class="card-body">
                                 <h5 class="card-title"><%= review.author.username %></h5>
-                                <p class="starability-result" data-rating="3"><%= review.rating %>Rated: 3 stars</p>
+                                <p class="starability-result" data-rating="<%= review.rating %>"><%= review.rating %> Rated: <%= review.rating %> stars</p>
                                 <p class="card-text"><%= review.comment %></p>
-                            </div>
+                            </div>                            
                             <form class="mb-3 card-text" method="post"
                                 action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
                                 <button class="btn btn-sm btn-dark">Delete</button>
                             </form>
                         </div>
-                        <% } %>
+                    <% } %>
                 </div>
+                <% } %>
+            </div>
+            <div class="col-6 offset-3 mb-3">
+                <h3>Where you'll be</h3>
+                <div id="map"></div>
             </div>
     </div>
+
+    <script src="/js/map.js"></script>

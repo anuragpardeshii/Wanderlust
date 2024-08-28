@@ -60,7 +60,6 @@ body {
 /* card */
 .listing-card {
     border: none !important;
-    margin-bottom: 2rem;
 }
 
 .card-img-top {
@@ -120,4 +119,11 @@ body {
 .show-card {
     padding-left: 0;
     padding-right: 0;
+}
+
+
+/* map */
+#map {
+    height: 400px;
+    width: 90vh;
 }

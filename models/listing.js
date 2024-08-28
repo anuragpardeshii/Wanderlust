@@ -41,6 +41,17 @@ const listingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "user",
     },
+    geometry: {
+        type: {
+            type: String, // Don't do `{ location: { type: String } }`
+            enum: ['Point'], // 'location.type' must be 'Point'
+            required: true
+          },
+          coordinates: {
+            type: [Number],
+            required: true
+          }
+    }
 });
 
 // Middleware to handle the deletion of associated reviews
