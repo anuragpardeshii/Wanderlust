@@ -22,6 +22,9 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
 const dbUrl = process.env.ATLASDB_URL;
+const compression = require('compression');
+app.use(compression());
+
 
 main().then(() => {
     console.log("connected to DB");
